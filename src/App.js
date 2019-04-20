@@ -8,7 +8,6 @@ import * as query from './constants/index.js'
 import {
     Route,
     NavLink,
-    HashRouter
 } from "react-router-dom";
 import Home from "./components/Home";
 import Stuff from "./components/Stuff";
