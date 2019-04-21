@@ -7,20 +7,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import  Login from './components/Login'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import {
-    Container
-} from 'react-bootstrap';
-
-
 ReactDOM.render(
-    <Container>
     <Router>
         <div>
             <Route exact path="/" component={App} />
             <Route exact path="/login"  component={()=><Login/>} />
         </div>
     </Router>
-    </Container>
     , document.getElementById('root')
 );
 

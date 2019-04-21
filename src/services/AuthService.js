@@ -1,27 +1,13 @@
 import decode from 'jwt-decode';
-import gql from 'graphql-tag';
 import APPLLO_CLIENT from './ApolloClientService'
 import * as query from '../constants/index.js'
 
 
-export const AUTHENTICATE_USER = gql`mutation loginUser($email: String!, $password: String!) {
-                       loginUser(email: $email, password: $password){
-                          token user{
-                                name role id
-                            }
-                         }
-                      }
-                `;
-
 export default class AuthService {
     // Initializing important variables
     constructor() {
-        this.login = this.login.bind(this)
-        this.getProfile = this.getProfile.bind(this)
-
-
-
-
+        this.login = this.login.bind(this);
+        this.getProfile = this.getProfile.bind(this);
     }
 
     login(email, password) {
@@ -82,7 +68,7 @@ export default class AuthService {
     setToken(loginData) {
         // Saves user token to localStorage
         localStorage.setItem('id_token', loginData.loginUser.token)
-        localStorage.setItem('login_user', loginData)
+        localStorage.setItem('login_user', JSON.stringify(loginData.loginUser))
 
     }
 
@@ -100,5 +86,9 @@ export default class AuthService {
     getProfile() {
         // Using jwt-decode npm package to decode the token
         return decode(this.getToken());
+    }
+
+    getLoginUser(){
+        return JSON.parse(localStorage.getItem('login_user'));
     }
 }
