@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 
-class UserEdit extends Component {
+class AddUser extends Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props.match.params.id)
     }
 
     render() {
         return (
             <div>
-                <h2>UserEdit:{this.props.match.params.id}</h2>
+                <h2>AddUser</h2>
                 <p>Cras facilisis urna ornare ex volutpat, et
                     convallis erat elementum. Ut aliquam, ipsum vitae
                     gravida suscipit, metus dui bibendum est, eget rhoncus nibh
@@ -24,4 +23,4 @@ class UserEdit extends Component {
     }
 }
 
-export default UserEdit;
+export default AddUser;

@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import  UserService from "../services/UserService"
-import Table from 'react-bootstrap/Table'
 import  {Link} from 'react-router-dom'
+import  UserTable from './UserTable'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 class Users extends Component {
 
@@ -12,71 +14,43 @@ class Users extends Component {
         this.state = {
             resolvedSuccess: false,
             users: [],
+            editing: false
         };
     }
 
     deleteUser = (user) =>{
-        console.log(user.id);
+        console.log('deleteUser',user.id);
     }
 
     editUser = (user) => {
-        console.log(user.id);
+        console.log("editUser", user.id);
+        this.setState({
+            editing:true
+        })
     }
 
 
     componentDidMount() {
         this.userService.getUsers().then(res =>{
-            console.log(res)
+            console.log(res);
             this.setState({ resolvedSuccess: true, users: res.data.users})
         }).catch(error => this.setState({ resolvedSuccess: false, users: []}));
     }
 
     render() {
         return (
-            <Table striped bordered hover size="sm">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {this.state.resolvedSuccess  ? (
-                    this.state.users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.role}</td>
-                            <td>{user.active? 'Active': 'Disabled'}</td>
-                            <td>
-                                <Link to={`/users/${user.id}`}>edit</Link>
-                                <button
-                                    onClick={() => {
-                                        this.deleteUser(user);
-                                    }}
-                                    className="button muted-button"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => this.editUser(user)}
-                                    className="button muted-button"
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))
-                ) : (
-                    <tr>
-                        <td colSpan={3}>No users</td>
-                    </tr>
-                )}
-                </tbody>
-            </Table>
+            <React.Fragment>
+        <Row>
+            <Col><UserTable users={this.state.users} parent={this}></UserTable> </Col>
+        </Row>
+                <Row>
+                    <Col>
+                        <Link to={`/users/add/new`}>Add new user</Link>
+                    </Col>
+                </Row>
+
+            </React.Fragment>
+
         );
     }
 

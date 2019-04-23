@@ -15,7 +15,8 @@ import  {Link} from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Users from './components/Users'
-import UserEdit from './components/UserEdit'
+import EditUser from './components/EditUser'
+import AddUser from  './components/AddUser'
 
 
 class App extends Component {
@@ -72,8 +73,9 @@ class App extends Component {
                                 <Route exact path="/" component={Home}/>
                                 <Route path="/stuff" component={Stuff}/>
                                 <Route path="/contact" component={Contact}/>
-                                <Route path="/users" component={Users}/>
-                                <Route path="/users/:id" component={UserEdit}/>
+                                <Route exact path="/users" component={Users}/>
+                                <Route exact path="/users/:id" component={EditUser}/>
+                                <Route exact path="/users/add/new" component={AddUser}/>
                             </div>
                         </Col>
                     </Row>

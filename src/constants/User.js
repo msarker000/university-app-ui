@@ -7,9 +7,7 @@ export const ALL_USERS = gql`query {
                             }
                         }
                 `;
-export const  DELETE_USER =gql`mutation deleteUsers($email: String!, $password: String!) {
-    }
-      `;
+
 
 export const  UPDATE_USER =gql`mutation updateUser($id: ID!, $user: UserInput) {
          updateUser(id: $id, user: $UserInput) {
