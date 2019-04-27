@@ -18,4 +18,12 @@ export default class UserService {
             });
 
     }
+
+    createUser = (name, email, role, active) =>{
+       return APPLLO_CLIENT.mutate({
+            mutation: query.CREATE_USER,
+            variables: {}
+       }
+        );
+    }
 }
