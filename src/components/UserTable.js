@@ -1,12 +1,24 @@
 import React, { Component } from "react";
 import Table from 'react-bootstrap/Table'
 import  {Link} from 'react-router-dom'
+import  instanceUserService from "../services/UserService"
 
 class UserTable extends Component {
 
     constructor(props) {
         super(props);
-        console.log("UserTable", props);
+        this.userService = instanceUserService;
+        this.state = {
+            resolvedSuccess: false,
+            users: [],
+        };
+
+    }
+
+    componentDidMount() {
+        this.userService.getUsers().then(res =>{
+            this.setState({ resolvedSuccess: true, users: res.data.users})
+        }).catch(error => this.setState({ resolvedSuccess: false, users: []}));
     }
 
     render() {
@@ -22,15 +34,15 @@ class UserTable extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.users.length  ? (
-                    this.props.users.map(user => (
+                {this.state.users.length  ? (
+                    this.state.users.map(user => (
                         <tr key={user.id}>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td>{user.active? 'Active': 'Disabled'}</td>
                             <td>
-                                <Link to={`/users/${user.id}`}>edit</Link>
+                                <Link to={`/users/${user.id}`} onClick={ () => this.props.parent.editUser(user)}>edit</Link>
                                 &nbsp;&nbsp;&nbsp;
                                 <Link to="/users"
                                     onClick={() => this.props.parent.deleteUser(user)}

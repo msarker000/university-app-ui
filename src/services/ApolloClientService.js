@@ -4,7 +4,7 @@ import { HttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
 
 //graphql
-const URI = 'http://localhost:4000/graphql';
+const URI = 'https://qvv9mqw58j.sse.codesandbox.io/graphql';
 
 
 const authLink = new ApolloLink((operation, forward) => {
@@ -19,11 +19,22 @@ const authLink = new ApolloLink((operation, forward) => {
 })
 
 const httpLink = new HttpLink({ uri: URI})
+const defaultOptions = {
+    watchQuery: {
+        fetchPolicy: 'network-only',
+        errorPolicy: 'ignore',
+    },
+    query: {
+        fetchPolicy: 'network-only',
+        errorPolicy: 'all',
+    },
+};
 
 // Create the apollo client
 export const APPLLO_CLIENT = new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    defaultOptions: defaultOptions,
 });
 
 

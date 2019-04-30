@@ -17,6 +17,9 @@ import Col from 'react-bootstrap/Col'
 import Users from './components/Users'
 import EditUser from './components/EditUser'
 import AddUser from  './components/AddUser'
+import Courses from  './components/Courses'
+import AddCourse from './components/AddCourse'
+import EditCourse from './components/EditCourse'
 
 
 class App extends Component {
@@ -36,11 +39,11 @@ class App extends Component {
         return (
             <Router>
                 <Navbar fixed="top" collapseOnSelect expand="lg" bg="light" variant="light">
-                    <Navbar.Brand href="/">{this.loginuser.user.role} Dashboard</Navbar.Brand>
+                  {/*  <Navbar.Brand href="/">{this.loginuser.user.role} Dashboard</Navbar.Brand>*/}
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                            Signed in as: <a href="#login">{this.loginuser.user.name}</a>
+                          {/*  Signed in as: <a href="#login">{this.loginuser.user.name}</a>*/}
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Navbar>
@@ -55,9 +58,9 @@ class App extends Component {
                                 }}>
                                     <ul style={{listStyleType: 'none', padding: 0}}>
                                         <li><Link to="/">Home</Link></li>
-                                        <li><Link to="/stuff">stuff</Link></li>
-                                        <li><Link to="/contact">contact</Link></li>
                                         <li><Link to="/users">Users</Link></li>
+                                        <li><Link to="/courses">Courses</Link></li>
+                                        <li><Link to="/contact">contact</Link></li>
                                     </ul>
 
                                     <ul style={{listStyleType: 'none', padding: 0}}>
@@ -76,6 +79,9 @@ class App extends Component {
                                 <Route exact path="/users" component={Users}/>
                                 <Route exact path="/users/:id" component={EditUser}/>
                                 <Route exact path="/users/add/new" component={AddUser}/>
+                                <Route exact path="/courses" component={Courses}/>
+                                <Route exact path="/courses/add/new" component={AddCourse}/>
+                                <Route exact path="/courses/:id" component={EditCourse}/>
                             </div>
                         </Col>
                     </Row>
@@ -85,4 +91,6 @@ class App extends Component {
     }
 }
 
-export default withAuth(App);
+
+export default App;
+//export default withAuth(App);

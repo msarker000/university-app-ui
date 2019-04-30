@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import  UserService from "../services/UserService"
+import React, {Component} from "react"
+import  instanceUserService from "../services/UserService"
 import  {Link} from 'react-router-dom'
 import  UserTable from './UserTable'
 import Row from 'react-bootstrap/Row'
@@ -9,40 +9,27 @@ class Users extends Component {
 
     constructor(props) {
         super(props);
-        this.userService = new UserService();
+        this.userService =  instanceUserService;
 
-        this.state = {
-            resolvedSuccess: false,
-            users: [],
-            editing: false
-        };
     }
 
-    deleteUser = (user) =>{
-        console.log('deleteUser',user.id);
+    deleteUser = (user) => {
+        console.log('deleteUser', user);
+        this.userService.setCurrentUser(user);
     }
 
     editUser = (user) => {
-        console.log("editUser", user.id);
-        this.setState({
-            editing:true
-        })
+        console.log("editUser", user);
+        this.userService.setCurrentUser(user);
     }
 
-
-    componentDidMount() {
-        this.userService.getUsers().then(res =>{
-            console.log(res);
-            this.setState({ resolvedSuccess: true, users: res.data.users})
-        }).catch(error => this.setState({ resolvedSuccess: false, users: []}));
-    }
 
     render() {
         return (
             <React.Fragment>
-        <Row>
-            <Col><UserTable users={this.state.users} parent={this}></UserTable> </Col>
-        </Row>
+                <Row>
+                    <Col><UserTable parent={this}></UserTable> </Col>
+                </Row>
                 <Row>
                     <Col>
                         <Link to={`/users/add/new`}>Add new user</Link>

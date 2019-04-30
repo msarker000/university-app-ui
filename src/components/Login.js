@@ -31,13 +31,15 @@ class Login extends Component {
 
     onSubmit = event => {
         event.preventDefault();
-        this.Auth.login(this.state.email, this.state.password)
+        /*this.Auth.login(this.state.email, this.state.password)
             .then(res =>{
                 this.props.history.push('/');
             })
             .catch(err =>{
                 alert(err);
-            })
+            })*/
+
+        this.props.history.push('/');
     };
 
     componentWillMount(){

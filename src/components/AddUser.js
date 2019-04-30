@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserService from  '../services/UserService'
+import instanceUserService from  '../services/UserService'
 
 class AddUser extends Component {
 
@@ -11,7 +11,7 @@ class AddUser extends Component {
             role:"Student",
             active: false
         };
-        this.userService = new UserService();
+        this.userService = instanceUserService;
     }
 
     onChange = (e) => this.setState({[e.target.name]: e.target.value});
@@ -26,7 +26,9 @@ class AddUser extends Component {
 
     onFormSubmit = event => {
         event.preventDefault();
-        console.log(this.state);
+
+        this.userService.createUser(this.state.name, this.state.email, this.state.role, this.state.active).then(res =>{
+        }).catch(error => console.log('error in create user'));
 
         this.setState({
             name: "",
@@ -34,10 +36,6 @@ class AddUser extends Component {
             role:"Student",
             active: false
         });
-
-        this.userService.createUser(this.state.name, this.state.email, this.state.role, this.state.active).then(res =>{
-            console.log(res);
-        }).catch(error => console.log('error in create user'));
 
     };
 
