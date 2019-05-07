@@ -8,6 +8,16 @@ export const ALL_USERS = gql`query {
                         }
                 `;
 
+export const ALL_STUDENTS = gql`query {
+                        students {
+                               id name email role courses{
+                                                         id  name
+                                                     }
+                            }
+                        }
+                `;
+
+
 
 export const  UPDATE_USER =gql`mutation updateUser($name: String!, $email: String!,  $role: Role!) {
          updateUser(name: $name, email: $email, role: $role) {

@@ -21,7 +21,6 @@ class CourseService {
 
     }
 
-
     createCourse = (name, facultyId) =>{
         return APPLLO_CLIENT.mutate({
             mutation: query.CREATE_COURSE,
@@ -48,9 +47,24 @@ class CourseService {
         console.log('_course:', this._currentCourse)
     }
 
+
+    addCourseToStudent = (_courseId, _studentId) => {
+        return APPLLO_CLIENT.mutate({
+            mutation: query.ADD_STUDENT_COURSE,
+            variables: {
+                courseID:_courseId,
+                studentID: _studentId
+            }}
+        );
+    }
+
+
     getCurrentCourse =() =>{
         return this._currentCourse;
     }
+
+
+
 
 }
 

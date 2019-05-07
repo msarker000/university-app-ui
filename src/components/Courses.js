@@ -23,6 +23,11 @@ class Courses extends Component {
         this.courseService.setCurrentCourse(course);
     }
 
+    selectCourse = (course) => {
+        console.log("selectCourse", course);
+        this.courseService.setCurrentCourse(course);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -31,10 +36,14 @@ class Courses extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Link to={`/courses/add/new`}>Add new user</Link>
+                        <Link to={`/courses/add/new`}>Add new course</Link>
                     </Col>
                 </Row>
-
+                <Row>
+                    <Col>
+                        <Link to="/addCourseToStudent">Add course to student</Link>
+                    </Col>
+                </Row>
             </React.Fragment>
 
         );

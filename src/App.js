@@ -20,6 +20,11 @@ import AddUser from  './components/AddUser'
 import Courses from  './components/Courses'
 import AddCourse from './components/AddCourse'
 import EditCourse from './components/EditCourse'
+import AddCourseToStudent from  './components/AddCourseToStudent'
+import Assignments from  './components/Assignments'
+import CourseDetails  from  './components/CourseDetails'
+import AddAssignments from './components/AddAssignments'
+
 
 
 class App extends Component {
@@ -60,6 +65,7 @@ class App extends Component {
                                         <li><Link to="/">Home</Link></li>
                                         <li><Link to="/users">Users</Link></li>
                                         <li><Link to="/courses">Courses</Link></li>
+                                        <li><Link to="/assignments">Assignments</Link></li>
                                         <li><Link to="/contact">contact</Link></li>
                                     </ul>
 
@@ -81,7 +87,11 @@ class App extends Component {
                                 <Route exact path="/users/add/new" component={AddUser}/>
                                 <Route exact path="/courses" component={Courses}/>
                                 <Route exact path="/courses/add/new" component={AddCourse}/>
-                                <Route exact path="/courses/:id" component={EditCourse}/>
+                                <Route exact path="/courses/edit/:id" component={EditCourse}/>
+                                <Route exact path="/courses/:id" component={CourseDetails}/>
+                                <Route exact path="/courses/:id/assignment/new" component={AddAssignments}/>
+                                <Route exact path="/addCourseToStudent" component={AddCourseToStudent}/>
+                                <Route exact path="/assignments" component={Assignments}/>
                             </div>
                         </Col>
                     </Row>

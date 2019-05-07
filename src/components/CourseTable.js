@@ -17,7 +17,6 @@ class CourseTable extends Component {
 
     componentDidMount() {
         this.courseService.getCourses().then(res =>{
-            console.log(res);
             this.setState({ resolvedSuccess: true, courses: res.data.courses})
         }).catch(error => this.setState({ resolvedSuccess: false, courses: []}));
     }
@@ -36,10 +35,10 @@ class CourseTable extends Component {
                 {this.state.courses.length  ? (
                     this.state.courses.map(course => (
                         <tr key={course.id}>
-                            <td>{course.name}</td>
+                            <td> <Link to={`/courses/${course.id}`} onClick={ () => this.props.parent.selectCourse(course)} >{course.name}</Link></td>
                             <td>{course.professor.name}</td>
                             <td>
-                                <Link to={`/courses/${course.id}`} onClick={ () => this.props.parent.editCourse(course)}>edit</Link>
+                                <Link to={`/courses/edit/${course.id}`} onClick={ () => this.props.parent.editCourse(course)}>edit</Link>
                                 &nbsp;&nbsp;&nbsp;
                                 <Link to="/courses"
                                       onClick={() => this.props.parent.deleteCourse(course)}

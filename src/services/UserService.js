@@ -64,6 +64,14 @@ class UserService {
     }
 
 
+    getStudents = () => {
+        return APPLLO_CLIENT
+            .query({
+                query: query.ALL_STUDENTS
+            });
+
+    }
+
 }
 
 const instanceUserService = UserService.getInstance();

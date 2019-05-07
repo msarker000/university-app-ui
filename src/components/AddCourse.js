@@ -30,9 +30,6 @@ class AddCourse extends Component {
     onFormSubmit = event => {
         event.preventDefault();
 
-        console.log(this.state.name,this.state.facultyID);
-
-
         this.courseService.createCourse(this.state.name,this.state.facultyID).then(res =>{
         }).catch(error => console.log('error in create course'));
 
