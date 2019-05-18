@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import  instanceCourseService from "../services/CourseService"
 import  instanceUserService from "../services/UserService"
+import {
+    Form, Button
+} from 'react-bootstrap'
+
 
 class EditCourse extends Component {
     constructor(props) {
@@ -17,7 +21,6 @@ class EditCourse extends Component {
         };
     }
 
-    onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
     handleFacultyChange = event => {
         this.setState({facultyID: event.target.value});
@@ -35,10 +38,7 @@ class EditCourse extends Component {
     onFormSubmit = event => {
         event.preventDefault();
 
-        console.log(this.state.name,this.state.facultyID);
-
-
-        this.courseService.createCourse(this.state.name,this.state.facultyID).then(res =>{
+        this.courseService.createCourse(event.target.name.value, event.target.faultyId.value).then(res =>{
         }).catch(error => console.log('error in create course'));
 
         this.setState({
@@ -46,43 +46,46 @@ class EditCourse extends Component {
             facultyID:-1
         });
 
+        event.target.reset();
+
     };
     render() {
         return (
-            <form onSubmit={this.onFormSubmit}>
-                <label>
-                    Course Name:
-                </label>
-
-                <input
-                    type="text"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.onChange}
-                />
 
 
-                <br />
-                <label>
-                    Faculty:
-                </label>
 
-                <select value={this.state.facultyID} onChange={this.handleFacultyChange}>
-                    <option value="-1">Select Faculty</option>
-                    {
-                        this.state.facultys.map(faulty => (
-                            <option key={faulty.id} value={faulty.id}>{faulty.name}</option>
-                        ))
-                    }
-
-                </select>
+        <React.Fragment>
+            <h5>Edit course </h5>
+            <hr/>
 
 
-                <br />
-                <br />
-                <input type="submit" value="Save" />
+            <Form onSubmit={this.onFormSubmit.bind(this)}>
+                <Form.Group controlId="formCourseName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" name="name" defaultValue={this.state.name} placeholder="Enter name"/>
+                </Form.Group>
+
+                <Form.Group controlId="formCourseFaculty">
+                    <Form.Label>Faculty</Form.Label>
+                    <Form.Control as="select" name="faultyId" value={this.state.facultyID} defaultValue={this.state.facultyID} onChange={this.handleFacultyChange} >
+                        <option value="-1">Select Faculty</option>
+                        {
+
+                            this.state.facultys.map(faulty => (
+                                <option key={faulty.id} value={faulty.id}>{faulty.name}</option>
+                            ))
+                        }
+                    </Form.Control>
+                </Form.Group>
+
+                <Button variant="outline-primary" type="submit">
+                    Save
+                </Button>
                 <hr />
-            </form>
+
+            </Form>
+        </React.Fragment>
+
         );
     }
 }

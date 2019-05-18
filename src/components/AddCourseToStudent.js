@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import  instanceCourseService from "../services/CourseService"
 import  instanceUserService from "../services/UserService"
+import {
+    Form, Button
+} from 'react-bootstrap'
 
 class AddCourseToStudent extends Component {
     constructor(props) {
@@ -15,17 +18,6 @@ class AddCourseToStudent extends Component {
         this.courseService = instanceCourseService;
     }
 
-    onChange = (e) => this.setState({[e.target.name]: e.target.value});
-
-    handleStudentChange = event => {
-        this.setState({selected_student_id: event.target.value});
-    };
-
-
-    handleCourseChange = event => {
-        this.setState({selected_course_id: event.target.value});
-    };
-
     componentDidMount() {
         this.userService.getStudents().then(res =>{
             this.setState({students: res.data.students})
@@ -33,61 +25,63 @@ class AddCourseToStudent extends Component {
 
 
         this.courseService.getCourses().then(res =>{
-            console.log(res.data);
             this.setState({courses: res.data.courses})
         }).catch(error => this.setState({courses: []}));
     }
 
     onFormSubmit = event => {
         event.preventDefault();
-        this.courseService.addCourseToStudent(this.state.selected_student_id,this.state.selected_course_id).then(res => {
+        this.courseService.addCourseToStudent(event.target.selected_course_id.value, event.target.selected_student_id.value).then(res => {
             console.log("added successfully.")
         }).catch(error => console.log('error in create course'));
 
-        this.setState({
-            selected_student_id: -1,
-            selected_course_id:-1,
-            students:[],
-            courses:[]
-        });
+        event.target.reset();
 
     };
 
 
     render()  {
         return (
-            <form onSubmit={this.onFormSubmit}>
-                <label>
-                    Student:
-                </label>
 
-                <select value={this.state.selected_student_id} onChange={this.handleStudentChange}>
-                    <option value="-1">Select Student</option>
-                    {
-                        this.state.students.map(student => (
-                            <option key={student.id} value={student.id}>{student.name}</option>
-                        ))
-                    }
-                </select>
+            <React.Fragment>
+                <h5>Assign course to Student </h5>
+                <hr/>
+                <Form onSubmit={this.onFormSubmit.bind(this)}>
 
-                <br />
-                <label>
-                    Course:
-                </label>
+                    <Form.Group controlId="formStudentId">
+                        <Form.Label>Student</Form.Label>
+                        <Form.Control as="select" name="selected_student_id">
+                            <option value="-1">Select Student</option>
+                            {
 
-                <select value={this.state.selected_course_id} onChange={this.handleCourseChange}>
-                    <option value="-1">Select Course</option>
-                    {
-                        this.state.courses.map(course => (
-                            <option key={course.id} value={course.id}>{course.name}</option>
-                        ))
-                    }
-                </select>
-                <br />
-                <br />
-                <input type="submit" value="Add" />
-                <hr />
-            </form>
+                                this.state.students.map(student => (
+                                    <option key={student.id} value={student.id}>{student.name}</option>
+                                ))
+                            }
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId="formCourseId">
+                        <Form.Label>Course</Form.Label>
+                        <Form.Control as="select" name="selected_course_id">
+                            <option value="-1">Select Course</option>
+                            {
+
+                                this.state.courses.map(course => (
+                                    <option key={course.id} value={course.id}>{course.name}</option>
+                                ))
+                            }
+                        </Form.Control>
+                    </Form.Group>
+<br/>
+                    <Button variant="outline-primary" type="submit">
+                        Save
+                    </Button>
+                    <hr />
+                </Form>
+
+
+            </React.Fragment>
+
         );
     }
 }

@@ -14,17 +14,14 @@ class Courses extends Component {
     }
 
     deleteCourse = (course) => {
-        console.log('deleteCourse', course);
         this.courseService.deleteCourse(course.id)
     }
 
     editCourse = (course) => {
-        console.log("editCourse", course);
         this.courseService.setCurrentCourse(course);
     }
 
     selectCourse = (course) => {
-        console.log("selectCourse", course);
         this.courseService.setCurrentCourse(course);
     }
 

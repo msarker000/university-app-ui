@@ -36,12 +36,12 @@ class AssignmentTable extends Component {
             <Table striped bordered hover size="sm">
                 <thead>
                 <tr>
-                    <th>Assignments</th>
+                    <th>Title</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                {this.state.assignments.length  ? (
+                {this.state.assignments != null && this.state.assignments.length  ? (
                     this.state.assignments.map(assigment => (
                         <tr key={assigment.id}>
                             <td>{assigment.name}</td>

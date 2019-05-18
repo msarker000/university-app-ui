@@ -2,8 +2,17 @@ import decode from 'jwt-decode';
 import APPLLO_CLIENT from './ApolloClientService'
 import * as query from '../constants/index.js'
 
+ class AuthService {
 
-export default class AuthService {
+    static _instance = null;
+
+    static getInstance() {
+        if (AuthService._instance == null) {
+            AuthService._instance = new AuthService();
+        }
+
+        return this._instance;
+    }
     // Initializing important variables
     constructor() {
         this.login = this.login.bind(this);
@@ -11,23 +20,6 @@ export default class AuthService {
     }
 
     login(email, password) {
-
-        /*return APPLLO_CLIENT
-            .mutate({
-                mutation: gql`
-            mutation{
-                loginUser(email:"++",password:"password"){
-                  token user{
-                       name role id
-                     }
-                 }
-            }
-            `,
-            })
-            .then(result => {
-                this.setToken(result.data); // Setting the token in localStorage
-                return Promise.resolve(result);
-            });*/
 
         console.log(email, password);
 
@@ -92,3 +84,5 @@ export default class AuthService {
         return JSON.parse(localStorage.getItem('login_user'));
     }
 }
+const instanceAuthService = AuthService.getInstance();
+export default instanceAuthService;

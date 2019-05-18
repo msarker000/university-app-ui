@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import AuthService from "../services/AuthService";
+import instanceAuthService from '../services/AuthService'
 
 /* A higher order component is frequently written as a function that returns a class. */
 export default function withAuth(AuthComponent) {
-    const Auth = new AuthService();
+    const Auth = instanceAuthService;
 
     return class AuthWrapped extends Component {
         constructor() {

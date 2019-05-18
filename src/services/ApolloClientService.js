@@ -4,7 +4,7 @@ import { HttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
 
 //graphql
-const URI = 'https://qvv9mqw58j.sse.codesandbox.io/graphql';
+const URI = 'http://localhost:4000/graphql';
 
 
 const authLink = new ApolloLink((operation, forward) => {

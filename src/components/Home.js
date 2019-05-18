@@ -1,25 +1,42 @@
 import React, { Component } from "react";
-
+import StudentHome from './StudentHome'
+import  FacultyHome from './FacultyHome'
+import instanceAuthService from '../services/AuthService'
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.match.params.value)
+        this.Auth = instanceAuthService;
+        this.loginuser = this.Auth.getLoginUser();
+        console.log(this.loginuser.user.role)
     }
     render() {
-        return (
-            <div>
-                <h2>HELLO</h2>
-                <p>Cras facilisis urna ornare ex volutpat, et
-                    convallis erat elementum. Ut aliquam, ipsum vitae
-                    gravida suscipit, metus dui bibendum est, eget rhoncus nibh
-                    metus nec massa. Maecenas hendrerit laoreet augue
-                    nec molestie. Cum sociis natoque penatibus et magnis
-                    dis parturient montes, nascetur ridiculus mus.</p>
+        if(this.loginuser.user.role === 'Faculty'){
+            return (
+                <div className="content">
+                    <FacultyHome/>
+                </div>
 
-                <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
-            </div>
-        );
+            );
+        }
+        else if(this.loginuser.user.role === 'Admin'){
+            return (
+                <div className="content">
+                    <StudentHome/>
+                </div>
+
+            );
+        }else{
+            return (
+                <div className="content">
+                    <StudentHome/>
+                </div>
+
+            );
+        }
+
+
+
     }
 }
 

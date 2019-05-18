@@ -4,12 +4,11 @@ import  {Link, BrowserRouter} from 'react-router-dom'
 import {
     Form
 } from 'react-bootstrap'
-import AuthService from '../services/AuthService'
 
 import {
     withRouter
 } from 'react-router-dom'
-
+import instanceAuthService from '../services/AuthService'
 
 class Login extends Component {
     constructor(props) {
@@ -19,7 +18,7 @@ class Login extends Component {
             email: "",
             password: ""
         };
-        this.Auth = new AuthService();
+        this.Auth = instanceAuthService;
     }
 
     validateForm() {
@@ -31,13 +30,13 @@ class Login extends Component {
 
     onSubmit = event => {
         event.preventDefault();
-        /*this.Auth.login(this.state.email, this.state.password)
+        this.Auth.login(this.state.email, this.state.password)
             .then(res =>{
                 this.props.history.push('/');
             })
             .catch(err =>{
                 alert(err);
-            })*/
+            })
 
         this.props.history.push('/');
     };

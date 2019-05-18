@@ -21,6 +21,7 @@ class UserService {
 
     }
 
+
     deleteUser = (id) => {
         return APPLLO_CLIENT
             .query({
@@ -29,34 +30,36 @@ class UserService {
 
     }
 
-    createUser = (name, email, role, active) =>{
+    createUser = (name, email, role, password) =>{
        return APPLLO_CLIENT.mutate({
             mutation: query.CREATE_USER,
             variables: {
                 name:name,
                 email:email,
                 role: role,
-                active: active
+                password: password
             }}
         );
     }
 
 
-    updateUser = (name, email, role, active) =>{
+    updateUser = (id, name, email, role, password) =>{
         return APPLLO_CLIENT.mutate({
             mutation: query.UPDATE_USER,
             variables: {
-                name:name,
-                email:email,
-                role: role,
-                active: active
+                id:id,
+                user: {
+                    name: name,
+                    email: email,
+                    role: role,
+                    password: password
+                }
             }}
         );
     }
 
     setCurrentUser = (_user) =>{
         this._currentUser = _user;
-        console.log('userServie:', this._currentUser)
     }
 
     getCurrentUser =() =>{
@@ -68,6 +71,14 @@ class UserService {
         return APPLLO_CLIENT
             .query({
                 query: query.ALL_STUDENTS
+            });
+
+    }
+
+    getFaculties = () => {
+        return APPLLO_CLIENT
+            .query({
+                query: query.ALL_FACULTIES
             });
 
     }

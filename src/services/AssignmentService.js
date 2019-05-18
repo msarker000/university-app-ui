@@ -24,6 +24,18 @@ class AssignmentService{
         );
     }
 
+    createAssigmentGrade = (_assignmentId, _studentId, _grade) =>{
+        return APPLLO_CLIENT.mutate({
+            mutation: query.CREATE_ASSIGNEMNT_GRADE,
+            variables: {
+                assignmentID:_assignmentId,
+                studentID:_studentId,
+                grade: _grade
+            }}
+        );
+    }
+
+
 
 
     deleteAssigment = (_assignmentId) =>{

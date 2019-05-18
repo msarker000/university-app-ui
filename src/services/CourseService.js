@@ -29,7 +29,7 @@ class CourseService {
                 facultyID:facultyId,
             }}
         );
-    }
+    };
 
 
     deleteCourse = (courseID) =>{
@@ -43,8 +43,9 @@ class CourseService {
 
 
     setCurrentCourse = (_course) =>{
+
         this._currentCourse = _course;
-        console.log('_course:', this._currentCourse)
+        console.log( this._currentCourse )
     }
 
 

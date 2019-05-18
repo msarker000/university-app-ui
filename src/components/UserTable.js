@@ -29,7 +29,6 @@ class UserTable extends Component {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>Status</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -40,7 +39,6 @@ class UserTable extends Component {
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>{user.role}</td>
-                            <td>{user.active? 'Active': 'Disabled'}</td>
                             <td>
                                 <Link to={`/users/${user.id}`} onClick={ () => this.props.parent.editUser(user)}>edit</Link>
                                 &nbsp;&nbsp;&nbsp;

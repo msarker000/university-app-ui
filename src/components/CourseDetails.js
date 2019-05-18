@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import  {Link} from 'react-router-dom'
 import  AssignmentTable from './AssignmentTable'
+import  CourseStudentTable from './CourseStudentTable'
 
 class CourseDetails extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class CourseDetails extends Component {
     render() {
         return (
             <div>
-                <h2>Course Details</h2>
+                <h5>Course Details</h5>
                 <hr/>
                 <React.Fragment>
                     <Row>
@@ -34,11 +35,17 @@ class CourseDetails extends Component {
                     <Row>
                         <Col>
                             <Link to={`/courses/${this.state.currentCourse.id}/assignment/new`}>Add new assignment</Link>
+                            <br/>
+                            <Link to={`/courses/${this.state.currentCourse.id}/assignment/grade`}>Assign grade</Link>
                         </Col>
                     </Row>
                 </React.Fragment>
                 <hr/>
+                <h5>Assignment List</h5>
                 <AssignmentTable  course={this.state.currentCourse}  />
+                <hr/>
+                <h5>Student List</h5>
+                <CourseStudentTable students={this.state.currentCourse.students}/>
 
             </div>
         );

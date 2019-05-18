@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
 
-import AuthService from './services/AuthService';
 import withAuth from './components/withAuth';
 import {
     Route,
@@ -24,14 +23,15 @@ import AddCourseToStudent from  './components/AddCourseToStudent'
 import Assignments from  './components/Assignments'
 import CourseDetails  from  './components/CourseDetails'
 import AddAssignments from './components/AddAssignments'
-
+import AssignGrade from './components/AssignGrade'
+import instanceAuthService from "./services/AuthService"
 
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.Auth = new AuthService();
+        this.Auth = instanceAuthService;
         this.loginuser = this.Auth.getLoginUser();
     }
 
@@ -44,11 +44,11 @@ class App extends Component {
         return (
             <Router>
                 <Navbar fixed="top" collapseOnSelect expand="lg" bg="light" variant="light">
-                  {/*  <Navbar.Brand href="/">{this.loginuser.user.role} Dashboard</Navbar.Brand>*/}
+                   <Navbar.Brand href="/">{this.loginuser.user.role} Dashboard</Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                          {/*  Signed in as: <a href="#login">{this.loginuser.user.name}</a>*/}
+                           Signed in as <a href="#login">{this.loginuser.user.name}</a>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Navbar>
@@ -65,8 +65,7 @@ class App extends Component {
                                         <li><Link to="/">Home</Link></li>
                                         <li><Link to="/users">Users</Link></li>
                                         <li><Link to="/courses">Courses</Link></li>
-                                        <li><Link to="/assignments">Assignments</Link></li>
-                                        <li><Link to="/contact">contact</Link></li>
+                                        <li><Link to="/contact">About us</Link></li>
                                     </ul>
 
                                     <ul style={{listStyleType: 'none', padding: 0}}>
@@ -92,6 +91,7 @@ class App extends Component {
                                 <Route exact path="/courses/:id/assignment/new" component={AddAssignments}/>
                                 <Route exact path="/addCourseToStudent" component={AddCourseToStudent}/>
                                 <Route exact path="/assignments" component={Assignments}/>
+                                <Route exact path="/courses/:id/assignment/grade" component={AssignGrade}/>
                             </div>
                         </Col>
                     </Row>
@@ -102,5 +102,5 @@ class App extends Component {
 }
 
 
-export default App;
-//export default withAuth(App);
+//export default App;
+export default withAuth(App);
