@@ -66,3 +66,25 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+heroku develoyment
+----------------
+npm install
+heroku local web
+git add .
+git commit -m "Added a Procfile."
+heroku login
+    Enter your Heroku credentials.
+    ...
+heroku create
+    Creating arcane-lowlands-8408... done, stack is cedar
+    http://arcane-lowlands-8408.herokuapp.com/ | git@heroku.com:arcane-lowlands-8408.git
+    Git remote heroku added
+git push heroku master
+    ...
+    -----> Node.js app detected
+    ...
+    -----> Launching... done
+           http://arcane-lowlands-8408.herokuapp.com deployed to Heroku

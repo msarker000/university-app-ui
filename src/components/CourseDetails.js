@@ -26,14 +26,16 @@ class CourseDetails extends Component {
 
         let _grades = [];
         for(const student of this.state.currentCourse.students){
-            for(const _grade of student.assignmentGrades){
-                let grade ={
-                    id: _grade.id,
-                    assignmentName: _grade.assignment.name,
-                    grade:_grade.grade,
-                    student: student.name
-                };
-                _grades.push(grade)
+            if(student.assignmentGrades != null) {
+                for (const _grade of student.assignmentGrades) {
+                    let grade = {
+                        id: _grade.id,
+                        assignmentName: _grade.assignment.name,
+                        grade: _grade.grade,
+                        student: student.name
+                    };
+                    _grades.push(grade)
+                }
             }
         }
 
