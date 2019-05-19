@@ -22,7 +22,6 @@ class StudentHome extends Component {
         this.userService.getStudents().then(res => {
             let _loginStudent = res.data.students.find(student => student.id === this.loginuser.user.id);
             this.setState({loginStudent: _loginStudent});
-            console.log('loginuser', _loginStudent);
             let _assignments = [];
             let _id =0;
             if(_loginStudent.courses != null){

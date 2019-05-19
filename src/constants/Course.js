@@ -9,9 +9,16 @@ export const ALL_COURSES = gql`query {
                                       id  name
                                         }
                                     students{
-                                    id name email
-                                    }
-                            }
+                                        id name email
+                                        assignmentGrades{
+                                                 id
+                                                 assignment{
+                                                     id  name
+                                                     }
+                                                 grade
+                                        }
+                              }     }
+                            
                          }`;
 
 

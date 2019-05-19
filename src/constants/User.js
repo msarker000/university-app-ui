@@ -10,6 +10,17 @@ export const  ALL_FACULTIES = gql`query {
                                                             professor{
                                                                id  name  email
                                                             }
+                                                            students{
+                                                                    id name email
+                                                                    
+                                                                    assignmentGrades{
+                                                                                 id
+                                                                                  assignment{
+                                                                                          id  name
+                                                                                  }
+                                                                    grade
+                                }
+                                                            }
                                                  }
                              }
                        }
@@ -30,17 +41,17 @@ export const ALL_STUDENTS = gql`query {
                                id name email role courses{
                                                          id  name 
                                                          professor{
-                                                             name email
+                                                             id name email
                                                          }
                                                          assignments{
-                                                                    name 
+                                                                  id   name 
                                                          }
                                                          
                                                      } 
                                 assignmentGrades{
                                  id
                                                 assignment{
-                                                           name
+                                                         id  name
                                                 }
                                       grade
                                 }

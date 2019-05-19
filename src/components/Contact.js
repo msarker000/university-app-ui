@@ -5,15 +5,18 @@ class Contact extends Component {
         return (
             <div>
                 <h2>Project By</h2>
-                <p>
+                <label>
                     Md Ayub Ali Sarker
-                </p>
-                <p>
-                    Md Ayub Ali Sarker
-                </p>
-                <p>
-                    Md Ayub Ali Sarker
-                </p>
+                </label>
+                <br/>
+                <label>
+                    Tony Hoang
+                </label>
+                <br/>
+                <label>
+                    Sonali Shintre
+                </label>
+
             </div>
         );
     }

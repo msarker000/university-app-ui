@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col'
 import  {Link} from 'react-router-dom'
 import  AssignmentTable from './AssignmentTable'
 import  CourseStudentTable from './CourseStudentTable'
+import instanceAuthService from '../services/AuthService'
+import GradeTable from './GradeTable'
 
 class CourseDetails extends Component {
     constructor(props) {
@@ -14,7 +16,34 @@ class CourseDetails extends Component {
 
         this.state = {
             currentCourse: this.courseService.getCurrentCourse(),
+            grades: []
         };
+
+        this.Auth = instanceAuthService;
+        this.loginuser = this.Auth.getLoginUser();
+
+        console.log(this.state.currentCourse)
+
+        let _grades = [];
+        for(const student of this.state.currentCourse.students){
+            for(const _grade of student.assignmentGrades){
+                let grade ={
+                    id: _grade.id,
+                    assignmentName: _grade.assignment.name,
+                    grade:_grade.grade,
+                    student: student.name
+                };
+                _grades.push(grade)
+            }
+        }
+
+
+        this.g_grades=_grades;
+
+    }
+
+
+    componentDidMount() {
     }
     render() {
         return (
@@ -34,10 +63,10 @@ class CourseDetails extends Component {
 
                     <Row>
                         <Col>
-                            <Link to={`/courses/${this.state.currentCourse.id}/assignment/new`}>Add new assignment</Link>
+                            {this.loginuser.user.role === 'Faculty' &&  <Link to={`/courses/${this.state.currentCourse.id}/assignment/new`}>Add assignment</Link>}
                             <br/>
-                            <Link to={`/courses/${this.state.currentCourse.id}/assignment/grade`}>Assign grade</Link>
-                        </Col>
+                            {this.loginuser.user.role === 'Faculty' && <Link to={`/courses/${this.state.currentCourse.id}/assignment/grade`}>Assign grade</Link>}
+                            </Col>
                     </Row>
                 </React.Fragment>
                 <hr/>
@@ -46,6 +75,10 @@ class CourseDetails extends Component {
                 <hr/>
                 <h5>Student List</h5>
                 <CourseStudentTable students={this.state.currentCourse.students}/>
+                <hr/>
+                <h5>Grade List</h5>
+                <GradeTable grades={this.g_grades} ></GradeTable>
+
 
             </div>
         );

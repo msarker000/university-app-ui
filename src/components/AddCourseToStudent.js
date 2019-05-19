@@ -20,8 +20,12 @@ class AddCourseToStudent extends Component {
 
     componentDidMount() {
         this.userService.getStudents().then(res =>{
+            console.log(res);
             this.setState({students: res.data.students})
-        }).catch(error => this.setState({students: []}));
+        }).catch(error => {
+            console.log('error',error)
+            this.setState({students: []})
+        });
 
 
         this.courseService.getCourses().then(res =>{

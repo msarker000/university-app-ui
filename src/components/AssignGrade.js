@@ -62,7 +62,8 @@ class AssignGrade extends Component {
                             <option value="-1">Select assignment</option>
                             {
 
-                                this.state.assignments.map(assignment => (
+
+                                this.state.assignments != null && this.state.assignments.map(assignment => (
                                     <option key={assignment.id} value={assignment.id}>{assignment.name}</option>
                                 ))
                             }
@@ -75,7 +76,7 @@ class AssignGrade extends Component {
                             <option value="-1">Select Student</option>
                             {
 
-                                this.state.students.map(student => (
+                                this.state.students != null && this.state.students.map(student => (
                                     <option key={student.id} value={student.id}>{student.name}</option>
                                 ))
                             }

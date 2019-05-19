@@ -33,12 +33,12 @@ class Courses extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Link to={`/courses/add/new`}>Add new course</Link>
+                        <Link to={`/courses/add/new`}>New course</Link>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <Link to="/addCourseToStudent">Add course to student</Link>
+                        <Link to="/addCourseToStudent">Assign course to student</Link>
                     </Col>
                 </Row>
             </React.Fragment>

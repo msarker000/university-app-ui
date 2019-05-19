@@ -63,8 +63,8 @@ class App extends Component {
                                 }}>
                                     <ul style={{listStyleType: 'none', padding: 0}}>
                                         <li><Link to="/">Home</Link></li>
-                                        <li><Link to="/users">Users</Link></li>
-                                        <li><Link to="/courses">Courses</Link></li>
+                                        {this.loginuser.user.role === 'Admin' && <li><Link to="/users">Users</Link></li>}
+                                        {this.loginuser.user.role === 'Admin' && <li><Link to="/courses">Courses</Link></li>}
                                         <li><Link to="/contact">About us</Link></li>
                                     </ul>
 

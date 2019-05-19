@@ -23,14 +23,13 @@ class FacultyHome extends Component {
 
     selectCourse = (course) => {
         this.courseService.setCurrentCourse(course);
-    }
+    };
 
 
     componentDidMount() {
         this.userService.getFaculties().then(res => {
             let _loginStudent = res.data.faculties.find(student => student.id === this.loginuser.user.id);
             this.setState({loginStudent: _loginStudent});
-            console.log('loginuser', _loginStudent);
             let _assignments = [];
             let _id =0;
             if(_loginStudent.courses != null){

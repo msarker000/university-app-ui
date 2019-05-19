@@ -43,9 +43,7 @@ class CourseService {
 
 
     setCurrentCourse = (_course) =>{
-
         this._currentCourse = _course;
-        console.log( this._currentCourse )
     }
 
 

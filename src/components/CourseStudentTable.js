@@ -15,7 +15,6 @@ class CourseStudentTable extends Component {
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Role</th>
                 </tr>
                 </thead>
                 <tbody>
