@@ -36,7 +36,7 @@ class CourseTable extends Component {
                     this.state.courses.map(course => (
                         <tr key={course.id}>
                             <td> <Link to={`/courses/${course.id}`} onClick={ () => this.props.parent.selectCourse(course)} >{course.name}</Link></td>
-                            <td>{course.professor.name}</td>
+                            <td>{ course.faculty.length > 0 ?  course.faculty[0].name: ''}</td>
                             <td>
                                 <Link to={`/courses/edit/${course.id}`} onClick={ () => this.props.parent.editCourse(course)}>edit</Link>
                                 &nbsp;&nbsp;&nbsp;

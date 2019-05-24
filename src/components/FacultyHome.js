@@ -28,7 +28,8 @@ class FacultyHome extends Component {
 
     componentDidMount() {
         this.userService.getFaculties().then(res => {
-            let _loginStudent = res.data.faculties.find(student => student.id === this.loginuser.user.id);
+            console.log(res)
+           let _loginStudent = res.data.faculties.find(student => student.id === this.loginuser.user.id);
             this.setState({loginStudent: _loginStudent});
             let _assignments = [];
             let _id =0;
@@ -47,7 +48,9 @@ class FacultyHome extends Component {
                 }
             }
 
-            this.setState({assignments: _assignments});
+           console.log(res);
+
+            //this.setState({assignments: _assignments});
 
 
         }).catch(error => {

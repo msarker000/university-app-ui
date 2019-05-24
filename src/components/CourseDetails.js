@@ -16,16 +16,19 @@ class CourseDetails extends Component {
 
         this.state = {
             currentCourse: this.courseService.getCurrentCourse(),
-            grades: []
+            grades: [],
+            assignments:[]
         };
 
         this.Auth = instanceAuthService;
         this.loginuser = this.Auth.getLoginUser();
 
-        console.log(this.state.currentCourse)
+        console.log(this.state.currentCourse);
 
         let _grades = [];
-        for(const student of this.state.currentCourse.students){
+
+
+       /* for(const student of this.state.currentCourse.students){
             if(student.assignmentGrades != null) {
                 for (const _grade of student.assignmentGrades) {
                     let grade = {
@@ -37,7 +40,7 @@ class CourseDetails extends Component {
                     _grades.push(grade)
                 }
             }
-        }
+        }*/
 
 
         this.g_grades=_grades;
@@ -46,6 +49,7 @@ class CourseDetails extends Component {
 
 
     componentDidMount() {
+
     }
     render() {
         return (
@@ -60,7 +64,7 @@ class CourseDetails extends Component {
 
                     <Row>
                         <Col><b> Faculty:</b> </Col>
-                        <Col>{this.state.currentCourse.professor.name}({this.state.currentCourse.professor.email}) </Col>
+                        <Col>{ this.state.currentCourse.faculty.length > 0 ?  this.state.currentCourse.faculty[0].name +'('+ (this.state.currentCourse.faculty[0].email)+')' : ''}) </Col>
                     </Row>
 
                     <Row>

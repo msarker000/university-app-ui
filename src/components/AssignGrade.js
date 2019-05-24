@@ -14,7 +14,7 @@ class AssignGrade extends Component {
         this.state = {
             courseId: this.props.match.params.id,
             students:this.courseService.getCurrentCourse().students,
-            assignments:this.courseService.getCurrentCourse().assignments
+            assignments:[]
         };
 
         this.assignmentService = instanceAssignmentService;
@@ -23,10 +23,10 @@ class AssignGrade extends Component {
     }
 
     componentDidMount() {
-        /*this.userService.getStudents().then(res =>{
-            console.log("res", res)
-            this.setState({students: res.data.students})
-        }).catch(error => {console.log('failed to get students')});*/
+        this.assignmentService.getAssignments().then(res =>{
+            let courseAssignments = res.data.assignments.filter(a => a.course[0].id === this.state.courseId);
+            this.setState({assignments: courseAssignments})
+        }).catch(error => this.setState({assignments: []}));
 
       console.log(this.courseService.getCurrentCourse())
 

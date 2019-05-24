@@ -26,7 +26,7 @@ class CourseService {
             mutation: query.CREATE_COURSE,
             variables: {
                 name:name,
-                facultyID:facultyId,
+                facultyId:facultyId,
             }}
         );
     };
@@ -51,8 +51,8 @@ class CourseService {
         return APPLLO_CLIENT.mutate({
             mutation: query.ADD_STUDENT_COURSE,
             variables: {
-                courseID:_courseId,
-                studentID: _studentId
+                userId:Number(_studentId),
+                courseId: Number(_courseId)
             }}
         );
     }

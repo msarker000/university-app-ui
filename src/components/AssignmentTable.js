@@ -9,7 +9,7 @@ class AssignmentTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            assignments: this.props.course.assignments,
+            assignments: [],
             course: this.props.course
         };
 
@@ -21,14 +21,17 @@ class AssignmentTable extends Component {
     deleteAssignment = (assignmentId) =>{
         this.assignmentService.deleteAssigment(assignmentId).then(res =>{
             console.log('Assignment deleted ')
-        }).catch(error => console.log('error in create user'));
+        }).catch(error => console.log('error in create user', error));
 
     }
 
 
 
     componentDidMount() {
-
+        this.assignmentService.getAssignments().then(res =>{
+            let courseAssignments = res.data.assignments.filter(a => a.course[0].id === this.state.course.id);
+            this.setState({assignments: courseAssignments})
+        }).catch(error => this.setState({assignments: []}));
     }
 
     render() {

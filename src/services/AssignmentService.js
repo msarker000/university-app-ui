@@ -18,8 +18,8 @@ class AssignmentService{
         return APPLLO_CLIENT.mutate({
             mutation: query.CREATE_ASSIGNEMNT,
             variables: {
-                courseID:_courseId,
                 name:_title,
+                courseId:_courseId
             }}
         );
     }
@@ -37,12 +37,20 @@ class AssignmentService{
 
 
 
+    getAssignments = () => {
+        return APPLLO_CLIENT
+            .query({
+                query: query.ALL_ASSIGNMENTS
+            });
+
+    }
+
 
     deleteAssigment = (_assignmentId) =>{
         return APPLLO_CLIENT.mutate({
             mutation: query.DELETE_ASSIGNMENT,
             variables: {
-                assignmentID:_assignmentId
+                assignmentId:_assignmentId
             }}
         );
     }

@@ -4,9 +4,9 @@ import { HttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
 
 //graphql
-//const URI = 'https://desolate-sands-94252.herokuapp.com/graphql'; // tony
+const URI = 'https://desolate-sands-94252.herokuapp.com/graphql'; // tony
 
-const URI = 'https://boiling-headland-90798.herokuapp.com/graphql';
+//const URI = 'https://boiling-headland-90798.herokuapp.com/graphql';
 
 const authLink = new ApolloLink((operation, forward) => {
     operation.setContext(
@@ -15,7 +15,7 @@ const authLink = new ApolloLink((operation, forward) => {
                 authorization: localStorage.getItem('id_token'),
             }
         }
-    )
+    );
     return forward(operation);
 })
 
@@ -27,7 +27,7 @@ const defaultOptions = {
     },
     query: {
         fetchPolicy: 'network-only',
-        errorPolicy: 'all',
+        errorPolicy: 'ignore',
     },
 };
 

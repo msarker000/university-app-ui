@@ -75,6 +75,14 @@ class UserService {
 
     }
 
+    getStudentsONLY = () => {
+        return APPLLO_CLIENT
+            .query({
+                query: query.ALL_STUDENTS_ONLY
+            });
+
+    }
+
     getFaculties = () => {
         return APPLLO_CLIENT
             .query({

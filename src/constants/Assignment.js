@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 
-    export const  CREATE_ASSIGNEMNT =gql`mutation createAssignment($courseID: ID!, $name: String!){
-                 createAssignment(courseID: $courseID, name: $name) {
+        export const  CREATE_ASSIGNEMNT =gql`mutation createAssignment( $name: String, $courseId: ID){
+                 createAssignment(name: $name, courseId: $courseId) {
                           id name course{
                                     id name
                             }
@@ -12,14 +12,9 @@ import gql from 'graphql-tag'
 
 
 
-export const  CREATE_ASSIGNEMNT_GRADE =gql`mutation createAssignmentGrade($assignmentID: ID!, $studentID:ID!, $grade: Float!){
-                 createAssignmentGrade(assignmentID: $assignmentID,studentID: $studentID, grade:$grade) {
-                         
-                          assignment{
-                                    id name
-                          } student{
-                                 name
-                          } grade
+export const  CREATE_ASSIGNEMNT_GRADE =gql`mutation addAssignmentGrade($userId: Int, $assignmentId:Int, $grade: Float){
+                 addAssignmentGrade(userId: $userId,assignmentId: $assignmentId, grade:$grade) {
+                           id userId assignmentId grade
                                         
                         }
                 }
@@ -27,9 +22,16 @@ export const  CREATE_ASSIGNEMNT_GRADE =gql`mutation createAssignmentGrade($assig
 
 
 
-export const  DELETE_ASSIGNMENT = gql`mutation deleteAssignment($assignmentID: ID!){
-                 deleteAssignment(assignmentID: $assignmentID) {
+export const  DELETE_ASSIGNMENT = gql`mutation deleteAssignment($assignmentId: ID!){
+                 deleteAssignment(assignmentId: $assignmentId) {
                           id  name  
                         }
                 }
       `;
+
+export const ALL_ASSIGNMENTS = gql`query {
+                          assignments{
+                                  id name course{id name} 
+                                }
+                        }
+                `;

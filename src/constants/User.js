@@ -2,27 +2,12 @@ import gql from 'graphql-tag'
 
 
 export const  ALL_FACULTIES = gql`query {
-                       faculties {
-                             id name email role  courses{
-                                                    id name assignments{
-                                                                id name 
-                                                              }
-                                                            professor{
-                                                               id  name  email
-                                                            }
-                                                            students{
-                                                                    id name email
-                                                                    
-                                                                    assignmentGrades{
-                                                                                 id
-                                                                                  assignment{
-                                                                                          id  name
-                                                                                  }
-                                                                    grade
-                                }
-                                                            }
-                                                 }
-                             }
+                           faculties {
+                                 id name email role  courses{
+                                 id name faculty {id name email}
+                                 students{ id name email}
+                                 }
+                           }
                        }
                 `;
 
@@ -35,26 +20,18 @@ export const ALL_USERS = gql`query {
                         }
                 `;
 
+export const ALL_STUDENTS_ONLY = gql`query {
+                        students {
+                               id name email role
+                               }
+                        }
+                `;
+
 
 export const ALL_STUDENTS = gql`query {
                         students {
-                               id name email role courses{
-                                                         id  name 
-                                                         professor{
-                                                             id name email
-                                                         }
-                                                         assignments{
-                                                                  id   name 
-                                                         }
-                                                         
-                                                     } 
-                                assignmentGrades{
-                                 id
-                                                assignment{
-                                                         id  name
-                                                }
-                                      grade
-                                }
+                               id name email 
+                               courses{ id name faculty {id name email}}
                                }
                         }
                 `;

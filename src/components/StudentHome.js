@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import  instanceUserService from '../services/UserService'
 import  instanceAuthService from '../services/AuthService'
+import  instanceAssignmentService from "../services/AssignmentService"
 import Table from 'react-bootstrap/Table'
 
 class StudentHome extends Component {
@@ -8,6 +9,7 @@ class StudentHome extends Component {
     constructor(props) {
         super(props);
         this.userService = instanceUserService;
+        this.assignmentService = instanceAssignmentService;
         this.state = {
             loginStudent: null,
             assignments:[],
@@ -24,7 +26,7 @@ class StudentHome extends Component {
             this.setState({loginStudent: _loginStudent});
             let _assignments = [];
             let _id =0;
-            if(_loginStudent.courses != null){
+            /*if(_loginStudent.courses != null){
                 for(const course of _loginStudent.courses){
                     if (course.assignments != null && course.assignments.length > 0){
                         for (let assignment of course.assignments){
@@ -37,9 +39,28 @@ class StudentHome extends Component {
                         }
                     }
                 }
+            }*/
+            if(_loginStudent.courses != null) {
+                this.assignmentService.getAssignments().then(res => {
+
+                    let _assignments = [];
+                    for(const course of _loginStudent.courses){
+                       res.data.assignments.filter(a => a.course[0].id === course.id)
+                           .map(e =>{
+                               let assignmentObj = {
+                                   id:_id++,
+                                   courseName: course.name,
+                                   assignmentName:  e.name
+                               };
+
+                               _assignments.push(assignmentObj)});
+                    }
+                    this.setState({assignments: _assignments})
+                }).catch(error => this.setState({assignments: []}));
             }
 
-            this.setState({assignments: _assignments});
+
+
             if(_loginStudent.assignmentGrades != null){
                 this.setState({assinmentGrades: _loginStudent.assignmentGrades});
             }
@@ -47,6 +68,7 @@ class StudentHome extends Component {
         }).catch(error => {
             console.log('Failed to get login student',error)
         });
+
 
     }
 
@@ -69,7 +91,7 @@ class StudentHome extends Component {
                         this.state.loginStudent.courses.map(course => (
                             <tr key={course.id}>
                                 <td>{course.name}</td>
-                             <td>Name:{course.professor.name} <br/> Email:{course.professor.email}</td>
+                             <td>Name:{course.faculty[0].name } <br/> Email:{course.faculty[0].email }</td>
                             </tr>
                         ))
                     ) : (
