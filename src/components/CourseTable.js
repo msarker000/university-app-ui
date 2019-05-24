@@ -27,7 +27,7 @@ class CourseTable extends Component {
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Professor</th>
+                    <th>Faculty</th>
                     <th></th>
                 </tr>
                 </thead>

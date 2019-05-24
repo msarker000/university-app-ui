@@ -22,6 +22,7 @@ class AddUser extends Component {
         event.preventDefault();
 
         this.userService.createUser(event.target.name.value, event.target.email.value, event.target.role.value, event.target.password.value).then(res => {
+            this.props.history.push('/users');
         }).catch(error => console.log('error in create user'));
 
         event.target.reset();

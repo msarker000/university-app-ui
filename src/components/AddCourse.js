@@ -27,6 +27,7 @@ class AddCourse extends Component {
         event.preventDefault();
 
         this.courseService.createCourse(event.target.name.value, event.target.faultyId.value).then(res => {
+            this.props.history.push('/courses');
             console.log('Course is added successfully')
 
         }).catch(error => console.log('error in create course'));
