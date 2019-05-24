@@ -22,7 +22,7 @@ class AddAssignments extends Component {
 
       this.assignmentService.createAssigment(this.state.courseId, event.target.title.value).then(res =>{
           console.log("created successfully..")
-          this.props.history.push('/courses/'+this.state.courseId);
+          this.props.history.push('/');
         }).catch(error => console.log('error in creating course'));
 
 

@@ -38,7 +38,7 @@ class AssignGrade extends Component {
         this.assignmentService.createAssigmentGrade(event.target.selected_Assignment_id.value, event.target.selected_student_id.value,
             Number(event.target.grade.value)).then(res =>{
             console.log("created successfully..")
-            this.props.history.push('/courses/'+this.state.courseId);
+            this.props.history.push('/');
         }).catch(error => console.log('error in creating course'));
 
 
